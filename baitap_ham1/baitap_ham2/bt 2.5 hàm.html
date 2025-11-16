@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Viết hàm nhận vào 3 số nguyên bất kỳ, trả về số nguyên có giá trị nhỏ nhất.</title>
+</head>
+<body>
+<script>
+    function min3so(a,b,c) {
+        let min = a;
+        if(b<min) b = min;
+         if(c<min) c = min;
+   return min;
+    }
+
+let num1 = +prompt("nhập số thứ 1");
+    let num2 = +prompt("nhập số thứ 2");
+    let num3= +prompt("nhập số thứ 3");
+
+let min = min3so(num1,num2,num3);
+alert("số nhỏ nhất là: " + min);
+
+
+
+
+
+
+</script>
+</body>
+</html>

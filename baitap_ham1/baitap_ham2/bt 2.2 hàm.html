@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tính diện tích và chu vi hình tròn:</title>
+
+    <h2 id="kq">diện tích là:  </h2>
+    <input name="number" id="r"placeholder="nhập bán kính">
+    <button onclick="tinhdientich()">tính diện tích</button>
+    <button onclick="tinhchuvi()">tính chu vi</button>
+</head>
+<body>
+<script>
+ function area(r) {
+    const n=Number(r);
+     if (Number.isNaN(n) || (n < 0)) {
+         return "lỗi.vui lòng nập đúng số";
+     }
+     return Math.PI * n * n;
+ }
+
+ function chuvi(r) {
+     const n=Number(r);
+
+ if(Number.isNaN(n) || (n < 0)) {
+     return "lỗi.vui lòng nhập đúng số";
+ }
+ return Math.PI * n * 2;
+ }
+     function tinhdientich() {
+
+         let r = +document.getElementById("r").value;
+         let kq = area(r)
+
+         document.getElementById("kq").innerText = "diện tích là :" + kq;
+     }
+function tinhchuvi() {
+    let r = +document.getElementById("r").value;
+    let kq = chuvi(r);
+    document.getElementById("kq").innerText="chu vi là :" + kq ;
+}
+
+</script>
+</body>
+</html>

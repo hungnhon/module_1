@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tính giai thừa:
+Viết hàm tính giai thừa của một số nguyên bất kỳ được đưa vào.
+Gọi và kiểm tra hàm vừa viết.</title>
+</head>
+<body>
+<h2 id="ketqua">tính n!</h2>
+<input type="number"id="kq">
+<button onclick="hienthiketqua()">tính n!</button>
+<script>
+
+
+        function tinh(n) {
+        if (n < 1) {
+            return "lỗi nhập số lớn hơn hoặc bằng 1";
+        }
+        let gt=1;
+        for (let i = 1; i <= n; i++) {
+         gt=gt*i;
+        }
+         return gt;
+        }
+    function hienthiketqua() {
+        let n= +document.getElementById("kq").value;
+        let ketqua =tinh(n);
+        document.getElementById("ketqua").innerText = "n! là :" + ketqua;
+    }
+
+</script>
+</body>
+</html>

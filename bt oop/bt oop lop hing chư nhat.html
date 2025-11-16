@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lop hinh chu nhat</title>
+</head>
+<body>
+<h3 id = "ketqua">ket qua la</h3>
+<input type = "number" id = "length" placeholder="nhap chieu dai" >
+<input type = "number" id= "width" placeholder="nhap chieu rong" >
+<button onclick="tinhhcn()">Ketqua la</button>
+<script>
+    class Hinhchunhat {
+        constructor(length, width) {
+            this.length = length;
+            this.width = width;
+        }
+
+        get area() {
+            return this.length * this.width;
+        }
+
+        get chuvi() {
+            return 2 * (this.length + this.width);
+        }
+    }
+     function tinhhcn() {
+            let dai = +document.getElementById("length").value;
+            let rong = +document.getElementById("width").value;
+            let hcn = new Hinhchunhat(dai, rong);
+            let area = hcn.area;
+            let chuvi = hcn.chuvi;
+
+         document.getElementById("ketqua").innerHTML = "cdien tich " +  area + " chu vi " +  chuvi;
+
+
+        }
+
+</script>
+</body>
+</html>

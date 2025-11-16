@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Viết một lớp đối tượng Temperature </title>
+</head>
+<body>
+<script>
+    class Temperature {
+        constructor (celsius) {
+            this.celsius = celsius;
+        }
+      set celsius(value) {
+         if(value <  -273) {
+             console.log("nhiệt độ phải lớn -273");
+             this._celsius = -273;
+         }else{
+             this._celsius = value;
+         }
+        }
+        get celsius(){
+            return this._celsius;
+        }
+        toFahrenheit(){
+            return this._celsius*9/5+32;
+        }
+toKelvin(){
+            return this._celsius+273.15
+}
+    }
+    let t =new Temperature(25);
+    document.write("celsius" + t.celsius+ "</br>");
+    document.write("Fahrenheit" + t.toFahrenheit()+ "</br>");
+    document.write("toKelvin" + t.toKelvin() );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
