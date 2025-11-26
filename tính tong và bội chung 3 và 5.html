@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tinh tong và bội chung củ 3 VÀ 5</title>
+</head>
+<body>
+<h3>nhập số lượng phần tử từ 1 đến 20:(1-20)</h3>
+
+   <input type="number" id="soluong" placeholder="nhap so" >
+    <button onclick="nhapmang()">nhập mảng</button>
+<p id="mang"></p>
+<p id="boichung"></p>
+<p id="tong"></p>
+<script>
+    function nhapmang() {
+        let a = +document.getElementById("soluong").value;
+if(a<1||a>20){
+    alert("vui long nhap mảng đúng số lượng yêu cầu");
+    return;
+}
+let arr=[];
+for(let i=1;i<=a;i++) {
+    let so = +prompt("nhập số thứ " + i + ":")
+    arr.push(so);
+
+    document.getElementById("mang").innerText = "mảng là [" + arr.join(",")+"]";
+}
+let boichung=[];
+let tong=0;
+
+for(let i=0;i<arr.length;i++){
+    if(arr[i]%3===0&&arr[i]%5===0){
+        boichung.push(arr[i]);
+        tong += arr[i];
+    }
+}
+if(boichung.length===0) {
+    document.getElementById("boichung").innerText = "mảng đã cho không có bội chung nào";
+}else {
+    document.getElementById("boichung").innerText = "Bội chung của 3 và 5 là:" + boichung.join(",");
+} document.getElementById("tong").innerText = "tổng của bội chung là :" + tong;
+
+
+
+    }
+</script>
+
+
+
+
+
+
+</body>
+</html>

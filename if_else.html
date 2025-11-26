@@ -1,10 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Tính chỉ số BMI</title>
 </head>
 <body>
-$END$
+<h2>Ứng dụng tính BMI</h2>
+
+<label for="weight">Cân nặng (kg): </label>
+<input type="number" id="weight">
+
+<label for="height">Chiều cao (m): </label>
+<input type="number" id="height" >
+
+<button onclick="tinhBMI()">Tính BMI</button>
+
+<p id="ketqua"></p>
+
+<script>
+    function tinhBMI() {
+        let weight = parseFloat(document.getElementById("weight").value);
+        let height = parseFloat(document.getElementById("height").value);
+
+        if ((weight <=0) || (height <=0))
+            document.getElementById("ketqua").innerText = "Vui lòng nhập cân nặng và chiều cao hợp lệ.";
+
+        }
+
+        let bmi = weight / (height * height);
+        let phanLoai = "";
+
+        if (bmi < 18.5) {
+            phanLoai = "Gầy";
+        } else if (bmi < 24.9) {
+            phanLoai = "Bình thường";
+        } else if (bmi < 29.9) {
+            phanLoai = "Thừa cân";
+        } else {
+            phanLoai = "Béo phì";
+        }
+
+        document.getElementById("ketqua").innerText =
+            "Chỉ số BMI = " + bmi.toFixed(2) + " → " + phanLoai;
+    }
+</script>
 </body>
 </html>

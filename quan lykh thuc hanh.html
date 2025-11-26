@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Case Study Quản Lya Khách Hàng</title>
+</head>
+<h2>Case Study:Quản Lý Khách Hàng</h2>
+<b>Sinh viên :</b> Nguyễn Văn Hùng <br>
+<b>Lớp :</b> 0925l1-jv105<br>
+<h3> Thông Tin Khách Hàng</h3>
+Mã Khách Hàng: <input id="ma" type="text" placeholder="nhập mã"><br><br>
+Tên Khách Hàng:<input id="ten" type="text" placeholder="nhập tên"><br><br>
+Số Điện Thoại:<input id="SDT" type="text" placeholder="nhập sdt"><br><br>
+Gmail:<input id="gmail" type="text" placeholder="nhập mail"><br><br>
+Địa Chỉ:<input id="diachi" type="text" placeholder=" nhập địa chỉ"><br><br>
+Ghi Chú:<input id="ghichu" type="text" placeholder="nhập ghi chú nếu có"><br><br>
+<button onclick="them()">Thêm Khách Hàng</button>
+<button onclick="capnhat()"id="bsua()" stype="dipslay:none">cập Nhật Khác Hàng</button>
+
+<h3>Danh Sách Khách Hàng:</h3>
+<table boder="1">
+    <thead>
+    <tr>
+        <th>Mã Khách Hàng</th>
+        <th>Tên Khách Hàng</th>
+        <th>Số Điện Thoại</th>
+        <th>Gmail</th>
+        <th>Ghi chú</th>
+        <th>Thao Tác</th>
+
+    </tr>
+    </thead>
+    <tbody id="ds">
+    </tbody>
+</table>
+<body>
+<script>
+    class KhachHang {
+        constructor (ma, ten, sdt, diachi, email, ghichu){
+        this.ma = ma;
+        this.ten = ten;
+        this.sdt = sdt;
+        this.diachi = diachi;
+        this.email = email;
+        this.ghichu = ghichu;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+</body>
+</html>

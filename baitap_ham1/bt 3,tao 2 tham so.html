@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tạo hàm nhận vào hai tham số:</title>
+   <script>
+      function sosanhvatinhtong (a,b) {
+     if(a>b) {
+       alert("a lớn hơn b")
+       }
+     else return a+b;
+       }
+function hienthiketqua () {
+      let so1 = +document.getElementById("so1").value;
+      let so2 = +document.getElementById("so2").value;
+      let ketqua = sosanhvatinhtong(so1,so2);
+       if(ketqua!== undefined) {
+       document.getElementById("ketqua").innerText = "ketqua" + ketqua;
+}
+       }
+   </script>
+
+</head>
+<body>
+<h1 id="ketqua">kết qua hiển thị tại đây</h1>
+<input type ="number" id = "so1" placeholder>
+<input type ="number" id = "so2" placeholder>
+<button onclick = "hienthiketqua()">kểm tra</button>
+</body>
+</html>

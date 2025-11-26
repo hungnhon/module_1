@@ -1,10 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Case Study - Quản lý & Tính tiền</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        h2 { background: #2b7cff; color: white; padding: 10px; }
+        input, button { padding: 8px; margin: 5px 0; width: 100%; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        table, th, td { border: 1px solid black; }
+        th, td { padding: 8px; text-align: center; }
+        .tab-btn { padding: 10px; background: #ccc; margin-right: 5px; cursor: pointer; border: none; }
+        .tab-btn.active { background: #2b7cff; color: white; }
+        .page { display: none; }
+    </style>
 </head>
 <body>
-$END$
+
+<h1>CASE STUDY: HỆ THỐNG FORM QUẢN LÝ VÀ TÍNH TIỀN</h1>
+
+<!-- ==== NAVIGATION ==== -->
+<button class="tab-btn active" onclick="openTab('nhap')">1. Nhập sản phẩm</button>
+<button class="tab-btn" onclick="openTab('quanly')">2. Quản lý</button>
+button class="tab-btn" onclick="openTab('tinhtien')">3. Tính tiền</button>
+
+<!-- ==== PAGE 1: FORM NHẬP ==== -->
+<div id="nhap" class="page" style="display:block;">
+    <h2>Trang 1: Nhập thông tin sản phẩm</h2>
+
+    <label>Mã sản phẩm</label>
+    <input id="ma">
+
+    <label>Tên sản phẩm</label>
+    <input id="ten">
+
+    <label>Giá (VNĐ)</label>
+    <input id="gia" type="number">
+
+    <label>Số lượng</label>
+    <input id="soluong" type="number">
+
+    <button onclick="themSanPham()">Thêm sản phẩm</button>
+    <div id="msg"></div>
+</div>
+
+<!-- ==== PAGE 2: QUẢN LÝ ==== -->
+<div id="quanly" class="page">
+    <h2>Trang 2: Quản lý sản phẩm</h2>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Mã</th><th>Tên</th><th>Giá</th><th>SL</th><th>Thành tiền</th><th>Xóa</th>
+        </tr>
+        </thead>
+        <tbody id="listSP"></tbody>
+    </table>
+</div>
+
+<!-- ==== PAGE 3: TÍNH TIỀN ==== -->
+<div id="tinhtien" class="page">
+    <h2>Trang 3: Tính tiền & Hóa đơn</h2>
+    <div id="hoadon"></div>
+</div>
+
+<script>
+    let ds = []; // Danh sách sản phẩm
+
+    function openTab(tab) {
+        let pages = document.getElementsByClassName('page');
+        let btns = document.getElementsByClassName('tab-btn');
+
+        for (let p of pages) p.style.display = "none";
+        for (let b of btns) b.classList.remove("active");
+
+        document.getElementById(tab).style.display = "block";
+        event.target.classList.add("active");
+
+        if (tab === 'quanly') hienDanhSach();
+        if (tab === 'tinhtien') tinhTien();
+    }
+
+    // ===== THÊM SẢN PHẨM =====
+    function themSanPham() {
+        let ma = document.getElementById("ma").value.trim();
+        let ten = document.getElementById("ten").value.trim();
+        let gia = Number(document.getElementById("gia").value);
+        let sl = Number(document.getElementById("soluong").value);
+
+        // Kiểm tra hợp lệ
+        if (!ma || !ten || isNaN(gia) || isNaN(sl) || gia <= 0 || sl <= 0) {
+            document.getElementById("msg").innerHTML = "❌ Nhập sai dữ liệu!";
+            return;
+        }
+
+        ds.push({ ma, ten, gia, sl });
+        document.getElementById("msg").innerHTML = "✅ Đã thêm sản phẩm!";
+
+        // Reset form
+        document.getElementById("ma").value = "";
+        document.getElementById("ten").value = "";
+        document.getElementById("gia").value = "";
+        document.getElementById("soluong").value = "";
+    }
+
+    // ===== HIỂN THỊ DANH SÁCH =====
+    function hienDanhSach() {
+        let html = "";
+        for (let i = 0; i < ds.length; i++) {
+            let sp = ds[i];
+            html += `<tr>
+                <td>${sp.ma}</td>
+                <td>${sp.ten}</td>
+                <td>${sp.gia}</td>
+                <td>${sp.sl}</td>
+                <td>${sp.gia * sp.sl}</td>
+                <td><button onclick="xoaSP(${i})">Xóa</button></td>
+            </tr>`;
+        }
+        document.getElementById("listSP").innerHTML = html;
+    }
+
+    // ===== XÓA =====
+    function xoaSP(i) {
+        ds.splice(i, 1);
+        hienDanhSach();
+    }
+
+    // ===== TÍNH TIỀN =====
+    function tinhTien() {
+        let tongSL = 0, tongTien = 0;
+
+        ds.forEach(sp => {
+            tongSL += sp.sl;
+            tongTien += sp.gia * sp.sl;
+        });
+
+        let vat = tongTien * 0.1;
+        let tongThanhToan = tongTien + vat;
+
+        document.getElementById("hoadon").innerHTML = `
+        <p><b>Tổng số lượng:</b> ${tongSL}</p>
+        <p><b>Tổng tiền hàng:</b> ${tongTien.toLocaleString()} VNĐ</p>
+        <p><b>Thuế VAT (10%):</b> ${vat.toLocaleString()} VNĐ</p>
+        <h3><b>Tổng thanh toán:</b> ${tongThanhToan.toLocaleString()} VNĐ</h3>
+    `;
+    }
+</script>
+
 </body>
 </html>

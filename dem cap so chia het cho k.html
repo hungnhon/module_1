@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>đếm cặp số chia hết cho k</title>
+</head>
+<body>
+<h3>Nhập số lượng phần tử của mảng (1 - 50):</h3>
+<input type="number" id="soluong" placeholder = nhapso>
+<button onclick="tongcapso()">Nhapso</button>
+<p id="mang"></p>
+<p id="sok"></p>
+<p id="capso"></p>
+<p id="hienthicapso"></p>
+<script>
+    function tongcapso() {
+        let n = +document.getElementById("soluong").value;
+        while (n < 0 || n > 50 || isNaN(n)) {
+            alert("nhập sai! vui lòng nhập lai")
+            n = +prompt("nhập số luọng phần tử từ 1-50")
+        }
+        let arr = [];
+        for (let i = 1; i <= n; i++) {
+            let so = +prompt("nhap số thứ" + i + ":");
+            arr.push(so);
+        }
+            document.getElementById("mang").innerText = "mảng đã nhập" + arr.join(",");
+
+let k = +prompt("nhập số nguyen duong k")
+        while (k < 0|| isNaN(k)) {
+            alert("vui lòng nhập lại số");
+            k= prompt("nhập lại k");
+        }
+document.getElementById("sok").innerText = "số k là:" + k;
+let hienthicapso=[];
+       let dem=0;
+       for (let i =0 ; i <arr.length-1; i++) {
+           for (let j = i + 1; j < arr.length; j++) {
+              if ((arr[i]+arr[j])%k===0){
+                  hienthicapso.push("("+arr[i]+","+arr[j]+")");
+                  dem++;
+               }
+           }
+
+       }
+      if(hienthicapso.length===0) {
+          document.getElementById("capso").innerText = "không có ặp số nào chia kết cho k"
+      }else {
+          document.getElementById("hienthicapso").innerText = "các cặp số chia hết cho k là: " + hienthicapso.join(",");
+          document.getElementById("hienthicapso").innerText = "các cặp số chia hết cho k là: " + hienthicapso.join(",");
+      }
+        document.getElementById("capso").innerText = "số cặp số chia hết cho k là: " + dem;
+    }
+</script>
+
+
+
+</body>
+</html>

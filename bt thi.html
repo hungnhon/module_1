@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+
+
+
+        <title>Quản Lý Nhân Viên</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        .form-box, .table-box { margin-bottom: 20px; padding: 15px; border: 1px solid #ccc; border-radius: 8px; }
+        input, button { margin: 5px; padding: 6px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ccc; padding: 6px; text-align: left; }
+        th { background: #007bff; color: white; }
+        button.edit { background: #ffc107; color: #000; }
+        button.delete { background: #dc3545; color: white; }
+    </style>
+    </head>
+    <body>
+
+    <h2>Ứng dụng quản lý nhân viên</h2>
+
+    <div class="form-box">
+        <h3>Thêm/Sửa nhân viên (Admin)</h3>
+        ID: <input id="empId">
+        Tên: <input id="empName">
+        Email: <input id="empEmail">
+        SĐT: <input id="empPhone">
+        Lương: <input id="empSalary" type="number">
+        Mật khẩu: <input id="empPassword" type="password">
+        <button onclick="addOrUpdateEmployee()">Thêm/Sửa</button>
+    </div>
+
+    <div class="table-box">
+        <h3>Danh sách nhân viên</h3>
+        <div id="employeeList"></div>
+    </div>
+
+    <script>
+        class Employee {
+        constructor(id, name, email, phone, password, salary) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+        this.salary = salary;
+        this.leaveRequests = [];
+    }
+    }
+
+        let employees = JSON.parse(localStorage.getItem('employees')) || [];
+        let editIndex = -1;
+
+        function addOrUpdateEmployee() {
+        let id = document.getElementById("empId").value.trim();
+        let name = document.getElementById("empName").value.trim();
+        let email = document.getElementById("empEmail").value.trim();
+        let phone = document.getElementById("empPhone").value.trim();
+        let salary = document.getElementById("empSalary").value;
+        let password = document.getElementById("empPassword").value;
+
+        if (!id || !name) { alert("Nhập ID và tên"); return; }
+
+        if(editIndex === -1){
+        employees.push(new Employee(id, name, email, phone, password, salary));
+    } else {
+        employees[editIndex] = new Employee(id, name, email, phone, password, salary);
+        editIndex = -1;
+    }
+
+        localStorage.setItem('employees', JSON.stringify(employees));
+        showEmployees();
+        clearForm();
+    }
+
+        function showEmployees() {
+        let html = '<table><tr><th>ID</th><th>Tên</th><th>Email</th><th>SĐT</th><th>Lương</th><th>Hành động</th></tr>';
+        employees.forEach((e, index) => {
+        html += `<tr>
+                        <td>${e.id}</td>
+                        <td>${e.name}</td>
+                        <td>${e.email}</td>
+                        <td>${e.phone}</td>
+                        <td>${e.salary}</td>
+                        <td>
+                            <button class="edit" onclick="editEmployee(${index})">Sửa</button>
+                            <button class="delete" onclick="deleteEmployee(${index})">Xóa</button>
+                        </td>
+                     </tr>`;
+    });
+        html += '</table>';
+        document.getElementById("employeeList").innerHTML = html;
+    }
+
+        function editEmployee(index){
+        let e = employees[index];
+        document.getElementById("empId").value = e.id;
+        document.getElementById("empName").value = e.name;
+        document.getElementById("empEmail").value = e.email;
+        document.getElementById("empPhone").value = e.phone;
+        document.getElementById("empSalary").value = e.salary;
+        document.getElementById("empPassword").value = e.password;
+        editIndex = index;
+    }
+
+        function deleteEmployee(index){
+        if(confirm("Bạn có chắc muốn xóa nhân viên?")){
+        employees.splice(index, 1);
+        localStorage.setItem('employees', JSON.stringify(employees));
+        showEmployees();
+    }
+    }
+
+        function clearForm(){
+        document.getElementById("empId").value = "";
+        document.getElementById("empName").value = "";
+        document.getElementById("empEmail").value = "";
+        document.getElementById("empPhone").value = "";
+        document.getElementById("empSalary").value = "";
+        document.getElementById("empPassword").value = "";
+    }
+
+        showEmployees();
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

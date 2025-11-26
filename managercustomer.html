@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Case Study Quản Lý Khách Hàng</title>
+</head>
+<body>
+
+<h2>CASE STUDY: Quản Lý Khách Hàng</h2>
+
+<b>Sinh viên:</b> Nguyễn Văn Hùng <br>
+<b>Lớp:</b> 0925l1-jv105<br>
+<hr>
+
+<h3>Nhập thông tin khách hàng</h3>
+
+Mã khách hàng: <input id="ma"><br><br>
+Tên khách hàng: <input id="ten"><br><br>
+Số điện thoại: <input id="sdt"><br><br>
+Địa chỉ: <input id="diachi"><br><br>
+Email: <input id="email"><br><br>
+Ghi chú: <input id="ghichu"><br><br>
+
+<button onclick="them()">Thêm khách hàng</button>
+<button onclick="capNhat()" id="btnSua" style="display:none">Cập nhật khách hàng</button>
+
+<hr>
+
+<h3>Danh sách khách hàng</h3>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Mã KH</th>
+        <th>Tên KH</th>
+        <th>SĐT</th>
+        <th>Địa chỉ</th>
+        <th>Email</th>
+        <th>Ghi chú</th>
+        <th>Thao tác</th>
+    </tr>
+    </thead>
+    <tbody id="dsBody"></tbody>
+</table>
+
+<script>
+    
+    class KhachHang {
+        constructor(ma, ten, sdt, diachi, email, ghichu){
+            this.ma = ma;
+            this.ten = ten;
+            this.sdt = sdt;
+            this.diachi = diachi;
+            this.email = email;
+            this.ghichu = ghichu;
+        }
+    }
+
+
+    let danhSach = [];
+    let indexSua = -1;
+
+
+    function them(){
+        let kh = new KhachHang(
+            ma.value,
+            ten.value,
+            sdt.value,
+            diachi.value,
+            email.value,
+            ghichu.value
+        );
+
+        danhSach.push(kh);
+        hienThi();
+        xoaForm();
+    }
+
+
+    function hienThi(){
+        let tbody = document.getElementById("dsBody");
+        tbody.innerHTML = "";
+
+        for(let i = 0; i < danhSach.length; i++){
+            let k = danhSach[i];
+            tbody.innerHTML +=
+      "<tr>" +
+                "<td>" + k.ma + "</td>" +
+                "<td>" + k.ten + "</td>" +
+                "<td>" + k.sdt + "</td>" +
+                "<td>" + k.diachi + "</td>" +
+                "<td>" + k.email + "</td>" +
+                "<td>" + k.ghichu + "</td>" +
+                "<td>" +
+                    "<button onclick='sua(" + i + ")'>Sửa</button>" +
+                    " " +
+                    "<button onclick='xoa(" + i + ")'>Xóa</button>" +
+                "</td>" +
+                "</tr>";
+        }
+    }
+
+
+    function sua(i){
+        indexSua = i;
+        let k = danhSach[i];
+
+        ma.value = k.ma;
+        ten.value = k.ten;
+        sdt.value = k.sdt;
+        diachi.value = k.diachi;
+        email.value = k.email;
+        ghichu.value = k.ghichu;
+
+        btnSua.style.display = "inline";
+    }
+
+
+    function capNhat(){
+        let k = danhSach[indexSua];
+
+        k.ma = ma.value;
+        k.ten = ten.value;
+        k.sdt = sdt.value;
+        k.diachi = diachi.value;
+        k.email = email.value;
+        k.ghichu = ghichu.value;
+
+        btnSua.style.display = "none";
+        hienThi();
+        xoaForm();
+    }
+
+
+    function xoa(i){
+        if(confirm("Bạn có muốn xóa khách hàng này không?")){
+            danhSach.splice(i, 1);
+            hienThi();
+        }
+    }
+
+
+    function xoaForm(){
+        ma.value = "";
+        ten.value = "";
+        sdt.value = "";
+        diachi.value = "";
+        email.value = "";
+        ghichu.value = "";
+    }
+</script>
+
+</body>
+</html>
